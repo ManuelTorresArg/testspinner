@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import org.w3c.dom.Element;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -39,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
         miSet.add(spin3);
         miSet.add(spin4);
 
-
-
         Iterator<Spinner> recorreSpinners = miSet.iterator();
 
         Integer indexRecorre = 0;
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 previo1 = actual1;
-                actual1 = (int) parent.getSelectedItemPosition();
+                actual1 = position;
 
                 SeteaSpinners(actual1,  previo1,  0);
 
@@ -123,10 +124,17 @@ public class MainActivity extends AppCompatActivity {
 
         Integer index = 0;
 
+        //for (Iterator<Spinner> it = recorreSpinners; it.hasNext(); ) {
+        //    Spinner e = it.next();
+
+
         while (recorreSpinners.hasNext()) {
 
-            if(recorreSpinners.next().getSelectedItemPosition() == nuevoValor && index != spinIndex ) {
-                recorreSpinners.next().setSelection(viejoValor);
+            Spinner actual = recorreSpinners.next();
+
+            if(actual.getSelectedItemPosition() == nuevoValor && index != spinIndex ) {
+
+                actual.setSelection(viejoValor);
 
             }
             index ++;
